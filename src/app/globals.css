@@ -1,26 +1,100 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --amber: #f5b544;
+  --ember: #ff7a2f;
+  --health: #ef4444;
+  --stamina: #4ade80;
+  --hunger: #f59e0b;
+  --thirst: #38bdf8;
+  --jev: #a78bfa;
+  --ink: #f5f1e8;
+  --ink-2: rgba(245, 241, 232, 0.72);
+  --ink-3: rgba(245, 241, 232, 0.45);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-amber: var(--amber);
+  --color-ember: var(--ember);
+  --color-health: var(--health);
+  --color-stamina: var(--stamina);
+  --color-hunger: var(--hunger);
+  --color-thirst: var(--thirst);
+  --color-jev: var(--jev);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --font-hud: var(--font-rajdhani), "Rajdhani", system-ui, sans-serif;
+  --font-title: var(--font-bebas), "Bebas Neue", Impact, sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", var(--font-inter), system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", var(--font-jetbrains), monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: #07090c;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.hud-glass {
+  background: linear-gradient(180deg, rgba(12, 14, 18, 0.62), rgba(12, 14, 18, 0.42));
+  backdrop-filter: blur(10px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hud-text {
+  font-family: var(--font-hud);
+  letter-spacing: 0.04em;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+}
+
+@layer components {
+.corner {
+  position: relative;
+}
+.corner::before,
+.corner::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: var(--amber);
+  opacity: 0.8;
+}
+.corner::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+}
+.corner::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+}
+}
+
+.thin-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+@keyframes eq {
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
   }
 }
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.eq > span {
+  animation: eq 0.9s ease-in-out infinite;
+  transform-origin: bottom;
 }
